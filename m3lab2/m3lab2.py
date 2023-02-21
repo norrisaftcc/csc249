@@ -11,16 +11,23 @@ We expect big theta (n lg n) swaps
 happen within merge)
 temp space on the order of (n) is needed for copying sub-arrays
 """
-def merge(numbers, i, j, k):
-    merged_size = k - i + 1               # Size of merged partition
+
+DEBUG = True
+
+def merge(numbers, low, mid, high):
+    merged_size = high - low + 1          # Size of merged partition
     merged_numbers = [0] * merged_size    # Dynamically allocates temporary array
                                           # for merged numbers
     merge_pos = 0                         # Position to insert merged number
-    left_pos = i                          # Initialize left partition position
-    right_pos = j + 1                     # Initialize right partition position
+    left_pos = low                        # Initialize left partition position
+    right_pos = mid + 1                   # Initialize right partition position
+    
+    if DEBUG:
+        print ("Merging indices [", low,"-", mid,"] and [", mid+1,"-", high,"]")
+        
    
     # Add smallest element from left or right partition to merged numbers
-    while left_pos <= j and right_pos <= k:
+    while left_pos <= mid and right_pos <= high:
         if numbers[left_pos] <= numbers[right_pos]:
             merged_numbers[merge_pos] = numbers[left_pos]
             left_pos += 1
@@ -30,38 +37,41 @@ def merge(numbers, i, j, k):
         merge_pos = merge_pos + 1
    
     # If left partition is not empty, add remaining elements to merged numbers
-    while left_pos <= j:
+    while left_pos <= mid:
         merged_numbers[merge_pos] = numbers[left_pos]
         left_pos += 1
         merge_pos += 1
    
     # If right partition is not empty, add remaining elements to merged numbers
-    while right_pos <= k:
+    while right_pos <= high:
         merged_numbers[merge_pos] = numbers[right_pos]
         right_pos = right_pos + 1
         merge_pos = merge_pos + 1
    
     # Copy merge number back to numbers
     for merge_pos in range(merged_size):
-        numbers[i + merge_pos] = merged_numbers[merge_pos]
+        numbers[low + merge_pos] = merged_numbers[merge_pos]
 
 
-def merge_sort(numbers, i, k):
-    j = 0
+def merge_sort(numbers, low, high):
+    mid = 0
 
-    if i < k:
-        j = (i + k) // 2  # Find the midpoint in the partition
+    if low < high:
+        mid = (low + high) // 2  # Find the midpoint in the partition
 
         # Recursively sort left and right partitions
-        merge_sort(numbers, i, j)
-        merge_sort(numbers, j + 1, k)
+        merge_sort(numbers, low, mid)
+        merge_sort(numbers, mid + 1, high)
             
         # Merge left and right partition in sorted order
-        merge(numbers, i, j, k)
+        merge(numbers, low, mid, high)
+    # else, base case (list of size one)
+    
 
 
 # Create a list of unsorted values
 numbers = [61, 76, 19, 4, 94, 32, 27, 83, 58]
+#numbers = [3, 2, 1, 0]
 
 # Print unsorted list
 print('UNSORTED:', numbers)
