@@ -2,7 +2,8 @@
 CSC249 Data Structures and Algorithms
 
 ## Included information 
-- M3T1 - Basic Selection Sort (in progress)
-- M3LAB1 - Revisions of Selection Sort
+- Module 3 - Sorting
+  - M3T1 - Basic Selection Sort (in progress)
+  - M3LAB1 - Revisions of Selection Sort
 
-Last edited 2/16/23
+Last edited 2/23/23
