@@ -7,3 +7,6 @@ Lists, Stacks, Queues
 	- doubly linked
 
 m4t1 - Singly linked lists
+m442 - Doubly Linked Lists
+m4lab - linked list of records
+m4hw  - online shop simulator
