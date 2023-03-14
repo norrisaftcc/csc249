@@ -16,7 +16,7 @@ today's date
 /*
 TODO 3/14/23: 
 - create Item class
-- template nodes to contain Item objects
+- template nodes to contain Item objects (or just modify Node to only take Item objects)
 - follow instructions from m4lab1:
 We'll create a record type Item, as in "an item in a store". Items contain a name (string) and a value (numeric, int or floating point).
 We'll then create a list of 3-5 Item records. (You can use singly linked lists for this.)
