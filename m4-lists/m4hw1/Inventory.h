@@ -40,13 +40,19 @@ private:
 
 public:
    string list_name;
-   LinkedList() {
+   Inventory() {
       list_name = "";
       head = nullptr;
       tail = nullptr;
    }
+
+   Inventory(string inv_name) {
+       list_name = inv_name;
+       head = nullptr;
+       tail = nullptr;
+   }
    
-   virtual ~LinkedList() {
+   virtual ~Inventory() {
       Product* currentNode = head;
       while (currentNode) {
          Product* toBeDeleted = currentNode;
@@ -67,11 +73,42 @@ public:
       }
    }
 
+  void AddCopy(Product* old_product) {
+    // first make a deep copy of old_product
+    // then add the new copy to the list
+    Product* new_product = new Product( old_product->name,
+                                        old_product->price);
+    Add(new_product);
+    
+  }
+
+  Product* FindByName(string product_name) {
+    // traverse the list until you find a product
+    // with the chosen name
+    // return nullptr if it is not found
+    Product* probe  = head;
+    while (probe != nullptr) {
+      string probe_name = probe->name;
+      cout << "comparing " << probe_name << " with " << product_name << endl;
+      if (product_name == probe_name) {
+        cout << "match!" << endl;
+        return probe;
+      }
+      probe = probe->next; 
+    }
+    // not found
+    cout << "didn't find " << product_name << endl;
+    return nullptr;
+  }
    
    void PrintContents(std::ostream& printStream, const std::string& separator = ", ") {
       Product* probe = head;
       // Show name of inventory, then contents
       cout << list_name << " contains: "<< endl;
+      // if no contents, say so
+      if (probe == nullptr) {
+        cout << "\tNothing";
+      }
       while (probe != nullptr) {
          printStream << "\tProduct: ";
          printStream << probe->name << " ($" << probe->price << ")";
