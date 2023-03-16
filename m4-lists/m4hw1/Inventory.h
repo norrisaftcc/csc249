@@ -15,18 +15,17 @@ Inventories can do the following:
 Handling quantities (which are always "one" for now" in Product 
 is left to the developer.)
 
-
 */
 
-class Node {
+class Product {
 public:
    string name;
    double price;
 
-   Node* next;
-   Node* previous;
+   Product* next;
+   Product* previous;
 
-   Node(string prod_name, double prod_price) {
+   Product(string prod_name, double prod_price) {
       name = prod_name;
       price = prod_price;
       next = nullptr;
@@ -34,10 +33,10 @@ public:
    }
 };
 
-class LinkedList {
+class Inventory {
 private:
-   Node* head;
-   Node* tail;
+   Product* head;
+   Product* tail;
 
 public:
    string list_name;
@@ -48,15 +47,15 @@ public:
    }
    
    virtual ~LinkedList() {
-      Node* currentNode = head;
+      Product* currentNode = head;
       while (currentNode) {
-         Node* toBeDeleted = currentNode;
+         Product* toBeDeleted = currentNode;
          currentNode = currentNode->next;
          delete toBeDeleted;
       }
    }
     
-   void Append(Node* newNode) {
+   void Add(Product* newNode) {
       if (head == nullptr) {
          head = newNode;
          tail = newNode;
@@ -67,22 +66,10 @@ public:
          tail = newNode;
       }
    }
-   /*
-   void Prepend(Node* newNode) {
-      if (head == nullptr) {
-         head = newNode;
-         tail = newNode;
-      }
-      else {
-         newNode->next = head;
-         head->previous = newNode;
-         head = newNode;
-      }
-   }
-   */
+
    
-   void PrintList(std::ostream& printStream, const std::string& separator = ", ") {
-      Node* probe = head;
+   void PrintContents(std::ostream& printStream, const std::string& separator = ", ") {
+      Product* probe = head;
       // Show name of inventory, then contents
       cout << list_name << " contains: "<< endl;
       while (probe != nullptr) {
@@ -92,32 +79,13 @@ public:
          probe = probe->next;
         
       }
-      printStream << std::endl;
+      printStream << endl;
    }
-   /*
-   void InsertAfter(Node* currentNode, Node* newNode) {
-      if (head == nullptr) {
-         head = newNode;
-         tail = newNode;
-      }
-      else if (currentNode == tail) {
-         tail->next = newNode;
-         newNode->previous = tail;
-         tail = newNode;
-      }
-      else {
-         Node* successor = currentNode->next;
-         newNode->next = successor;
-         newNode->previous = currentNode;
-         currentNode->next = newNode;
-         successor->previous = newNode;
-      }
-   }
-   */
+
    
-   void Remove(Node* currentNode) {
-      Node* successor = currentNode->next;
-      Node* predecessor = currentNode->previous;
+   void Remove(Product* currentNode) {
+      Product* successor = currentNode->next;
+      Product* predecessor = currentNode->previous;
       
       if (successor) {
          successor->previous = predecessor;

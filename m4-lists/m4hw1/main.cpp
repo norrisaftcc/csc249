@@ -35,7 +35,7 @@ int main() {
   cout << "Shopping Cart Application" << endl;
 
   // create a product (Node)
-  Node* prod_apple = new Node("apple", 0.25);
+  Product* prod_apple = new Product("apple", 0.25);
   cout << prod_apple->name << " " << prod_apple->price << endl;
 
   
