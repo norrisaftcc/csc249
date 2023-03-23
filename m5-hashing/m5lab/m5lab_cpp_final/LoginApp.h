@@ -72,7 +72,7 @@ User LoginApp::login(string name, string password) {
 
 User LoginApp::register_account(string name, string password) {
     // see if user already exists
-    if (user_map
+
 }
 
 #endif // LOGIN_APP_H
