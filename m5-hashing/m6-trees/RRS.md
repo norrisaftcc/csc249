@@ -2,6 +2,7 @@
 ## From MIT 6.006 FA11
 
 Assume an airport with a single runway. 
+(For example: San Diego Airport: https://youtu.be/U-phx0QV39w?t=690 or https://youtu.be/LigswTr9yzY)
 Our problem is to reserve times for future landings. 
 
 Add time t to the set R of landing times IF no other landings are scheduled within k minutes
@@ -104,6 +105,18 @@ so now 49 [6], 46 [2], 43 [1]
 there's a more efficient way (recursive, 1 pass) way to do this, but it's OK for a first look.
 
 Now, how can we calculate Rank(t) from these subtree sizes?
+(this comes later)
+What lands before t?
+1. walk down tree to find the desired time
+2. add in the nodes that are smaller
+3. add in the subtrees size to the left
+
+do a lookup on time, and do the "<" operator to find all elements <= to t
+ex. <= 79 t=79
+49? it's less, add 1
+- since i moved to the right, add the subtree size to the left (+2 from subtree 46)
+79 <= 79, add 1
+- add the subtree size to the left of 79 (so add 1)
 
 
 
