@@ -63,8 +63,51 @@ Binary Search Tree invariant:
 
 
 now model RRS with BST:
-- insert
-- check
+- insert O(h) where h=height of tree
+- check (do the check during the search)
 - delete
+we haven't covered delete yet, when we do, we'll need to move pointers around (like with linked lists)
+
+
+sample run:
+insert 49, 79, 46, 41
+insert 42, 45 
+
+--
+not quite done yet.
+Many operations can be done on a BST in O(h) time, some in O(k) time
+
+- find_min() -> keep going to the left
+- find_max() -> keep going to the right
+- next_largest(x) -> (find x, go one to the right)
+
+--
+Augmented BSTs - contain more data than just the pointers covered
+("amending the design", for example add a record that our key relates to)
+
+Let's assume that there's an additional constraint added to spec, that we have to solve with our BST design
+- Be able to compute Rank(t) : How many planes are scheduled to land at times <= t ?
+
+we augment the BST to handle this new spec change, without losing our performance
+Augment the BST structure by adding to the node
+- int: how many nodes are below this node
+
+ex: 49, 46, 79, 64, 83
+so the key is t, the value is associated with that key
+when we insert or delete, we modify this 'size' value
+we're using this to track the size of our 'subtree' (count yourself)
+so 46 [1] , 64 [1] , 83 [1], 79 [3], 49 [5]
+
+insert 43, follow the insertion path, as you go, increment each node by one,
+so now 49 [6], 46 [2], 43 [1]
+(note that you don't want to actually update these if the insert will fail, so search first then insert.)
+there's a more efficient way (recursive, 1 pass) way to do this, but it's OK for a first look.
+
+Now, how can we calculate Rank(t) from these subtree sizes?
+
+
+
+
+
 
 
