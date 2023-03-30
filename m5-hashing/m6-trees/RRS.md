@@ -32,4 +32,39 @@ Proposing to use all the data structures we know, and then ruling them out
 	- ex. to insert 34, i can find the 'insertion point' (the value below it, and above it)
 	- now i look at both of those and do the k-constraint check
 	- but insertion is O of what?
+	formally:
+	- it can find the smallest i such that R[i] >= t in O(lg n) time
+	- compare R[i] and R[i-1] in O(1) time
+	- but insertion is linear time since it requires shifting items to make room
+
+3. Linked list
+	- insertion is constant time
+	- search is ...?
+
+4. Heaps (not yet coverd) - minheaps, maxheaps
+	- an array that you can visualize as a tree
+	- the <=k or >=k from t check is O(n) time with a heap
+
+5. Hash Table / Dictionary
+	- good insertion time and search time
+	- but the <=k or >=k from t check is O(n) time with a dictionary
+
+Our pipe dream:
+	- if we could do fast insertion into
+	- a sorted array
+then we would meet all of our constraints.
+
+This is what BSTs do for us.
+
+Binary Search Tree invariant:
+	for all nodes x:
+	- if y is in the left subtree of x, key(y) <= key(x)
+	- if y is in the right subtree of x, key(y) >= key(x)
+
+
+now model RRS with BST:
+- insert
+- check
+- delete
+
 
