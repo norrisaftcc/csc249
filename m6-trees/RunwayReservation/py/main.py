@@ -30,8 +30,8 @@ Disadvantages of using a binary search tree:
     Unbalanced trees: In some cases, binary search trees can become unbalanced, which can result in degraded performance. This can be mitigated by using balanced binary search trees, but this adds additional complexity to the implementation.
 """
 
-#from RRS import RunwayReserver
-from RRS_BST import RunwayReserver
+from RRS import RunwayReserver
+#from RRS_BST import RunwayReserver
 
 # sample usage by ChatGPT
 def main():
@@ -43,6 +43,9 @@ def main():
   
   # lookup plane "AA123" at time 10
   print(r.lookup_plane("AA123", 10.0))  # "AA123 is scheduled at 10"
+  
+  # lookup plane "AA123" at time 8
+  print(r.lookup_plane("AA123", 8.0))  # "AA123 is not scheduled at 8.0"
   
   # remove plane "AA123" at time 10
   r.remove_plane("AA123", 10.0)
