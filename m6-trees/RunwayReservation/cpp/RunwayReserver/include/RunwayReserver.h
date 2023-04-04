@@ -52,6 +52,8 @@ class RunwayReserver
             m_planes.push_back(p);
             // Last, if all has gone well, update the plane's internal time
             // p.SetlandingTime(t);
+            // sort the vector
+
             // in debug mode, check RI each time
             if (DEBUG) {
                 bool check = checkRI();
@@ -75,6 +77,7 @@ class RunwayReserver
 
         Plane* lookup(double t) {
             // find plane at time t if it exists, nullptr otherwise
+            // TODO: this is not working, the time check fails
             for (auto plane: m_planes) {
                 cout << "Checking plane: " << plane.Getcallsign() << " at " << plane.GetlandingTime() << endl;
                 if (plane.GetlandingTime() == t) {
