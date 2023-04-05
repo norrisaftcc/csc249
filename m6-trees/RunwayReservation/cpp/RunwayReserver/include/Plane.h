@@ -37,6 +37,15 @@ class Plane
          */
         void setCallsign(string val) { m_callsign = val; }
 
+        // less than operator -- used for sort
+        // planes are to be sorted by landing time
+        bool operator < (Plane& otherPlane) {
+            if (m_landingTime < otherPlane.getTime() ) {
+                return true;
+            }
+            return false;
+        }
+
     protected:
 
     private:

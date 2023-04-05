@@ -1,6 +1,7 @@
 #ifndef RUNWAYRESERVER_H
 #define RUNWAYRESERVER_H
 #import <vector>
+#import <algorithm>     // for sort()
 using namespace std;
 
 
@@ -49,10 +50,12 @@ class RunwayReserver
             // return true if successful, false otherwise
             // add plane to our internal vector
             p.setTime(t);
-            m_planes.push_back(p);
-            // Last, if all has gone well, update the plane's internal time
-            // p.SetlandingTime(t);
+            m_planes.push_back(p); // inserts a copy of p into m_planes
+            // if the insert fails, we should reset plane's time to 0
+            // (but if it fails, it's not copied)
+
             // sort the vector
+            sort(m_planes.begin(), m_planes.end());
 
             // in debug mode, check RI each time
             if (DEBUG) {
@@ -72,22 +75,63 @@ class RunwayReserver
             // return true if successful, false otherwise
             // Last, if remove succeeds, set plane's internal time to 0
             // if p exists, p.SetLandingTime(0)
-            return false; // unimplemented
+            // this is not necessary, as the removed plane is disposed of
+            for (int i=0; i < m_planes.size(); i++) {
+                if (m_planes[i].getTime() == t) {
+                    // item i is found at vector.begin() + index
+                    m_planes.erase(m_planes.begin() + i);
+                    return true; // successful remove
+                }
+            }
+            /*
+            for (Plane p: m_planes) {
+                if (p.getTime() == t) {
+                    if (DEBUG) {cout << "Removing plane at t=" << t << endl;}
+                    m_planes.remove(m_planes.begin(), m_planes_end(), p);
+                }
+
+            }
+            */
+            return false; // not found
         }
 
-        Plane* lookup(double t) {
+        Plane lookup(double t) {
             // find plane at time t if it exists, nullptr otherwise
             // TODO: this is not working, the time check fails
             for (auto plane: m_planes) {
-                cout << "Checking plane: " << plane.getCallsign() << " at " << plane.getTime() << endl;
+                if (DEBUG) {
+                    cout << "Checking plane: " << plane.getCallsign() << " at " << plane.getTime() << endl;
+                }
                 if (plane.getTime() == t) {
-                    cout << "plane " << plane.getCallsign() << " found at t=" << t << endl;
-                    return &plane; // reference (pointer)
+                    if (DEBUG) {
+                        cout << "plane " << plane.getCallsign() << " found at t=" << t << endl;
+                    }
+                    return plane; // should this be a reference?
                 }
             }
-            return nullptr; // unimplemented
+            // didn't find anything
+            if (DEBUG) { cout << "lookup failed, nothing at t=" << t << endl;}
+            return Plane(); // not found -- this isn't ideal
         }
 
+        // listPlanes() -- print each plane in order
+        void listPlanes() {
+            cout << "Landing Queue:" << endl;
+            if (m_planes.size() == 0) {
+                cout << "No planes scheduled to land." << endl;
+                return;
+            }
+            // "Rank" is order the plane has in the landing queue
+            // first plane is rank 1, etc.
+            int rank = 1;
+            for (Plane plane: m_planes) {
+                cout << "Rank #" << rank << ": " << plane.getCallsign();
+                cout << " landing at t=" << plane.getTime() << endl;
+                rank++;
+            }
+            cout << "End of landing queue." << endl;
+            return;
+        }
 
 
     protected:
@@ -104,7 +148,10 @@ class RunwayReserver
             double last_time = 0.0;
             for (auto plane : m_planes) {
                 double current_time = plane.getTime();
-                cout << plane.getCallsign() << " " << current_time << endl;
+                if (DEBUG) {
+                    cout << plane.getCallsign() << " " << current_time << endl;
+                }
+
                 if (current_time < last_time) {
                     cout << "RI invalid -- planes not sorted" << endl;
                     return false;
