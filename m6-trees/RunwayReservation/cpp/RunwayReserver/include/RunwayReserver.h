@@ -49,13 +49,14 @@ class RunwayReserver
             // add plane p in order at time t
             // return true if successful, false otherwise
             // add plane to our internal vector
+            if (DEBUG) { cout <<"adding "<< p.getCallsign()<<" at t="<<t<<endl;}
             p.setTime(t);
             m_planes.push_back(p); // inserts a copy of p into m_planes
             // if the insert fails, we should reset plane's time to 0
             // (but if it fails, it's not copied)
 
             // sort the vector
-            sort(m_planes.begin(), m_planes.end());
+            //sort(m_planes.begin(), m_planes.end());
 
             // in debug mode, check RI each time
             if (DEBUG) {
