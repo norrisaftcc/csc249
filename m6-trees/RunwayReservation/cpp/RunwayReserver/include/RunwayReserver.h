@@ -33,11 +33,11 @@ class RunwayReserver
         /** Access m_landingWindow
          * \return The current value of m_landingWindow
          */
-        double GetlandingWindow() { return m_landingWindow; }
+        double getTime() { return m_landingWindow; }
         /** Set m_landingWindow
          * \param val New value to set
          */
-        void SetlandingWindow(double val) {
+        void setTime(double val) {
             if (val > 0) {
                     m_landingWindow = val;
             }
@@ -48,7 +48,7 @@ class RunwayReserver
             // add plane p in order at time t
             // return true if successful, false otherwise
             // add plane to our internal vector
-            p.SetlandingTime(t);
+            p.setTime(t);
             m_planes.push_back(p);
             // Last, if all has gone well, update the plane's internal time
             // p.SetlandingTime(t);
@@ -79,9 +79,9 @@ class RunwayReserver
             // find plane at time t if it exists, nullptr otherwise
             // TODO: this is not working, the time check fails
             for (auto plane: m_planes) {
-                cout << "Checking plane: " << plane.Getcallsign() << " at " << plane.GetlandingTime() << endl;
-                if (plane.GetlandingTime() == t) {
-                    cout << "plane " << plane.Getcallsign() << " found at t=" << t << endl;
+                cout << "Checking plane: " << plane.getCallsign() << " at " << plane.getTime() << endl;
+                if (plane.getTime() == t) {
+                    cout << "plane " << plane.getCallsign() << " found at t=" << t << endl;
                     return &plane; // reference (pointer)
                 }
             }
@@ -103,8 +103,8 @@ class RunwayReserver
             // TODO: This is NOT the k window check!
             double last_time = 0.0;
             for (auto plane : m_planes) {
-                double current_time = plane.GetlandingTime();
-                cout << plane.Getcallsign() << " " << current_time << endl;
+                double current_time = plane.getTime();
+                cout << plane.getCallsign() << " " << current_time << endl;
                 if (current_time < last_time) {
                     cout << "RI invalid -- planes not sorted" << endl;
                     return false;

@@ -21,21 +21,21 @@ class Plane
         /** Access m_landingTime
          * \return The current value of m_landingTime
          */
-        double GetlandingTime() { return m_landingTime; }
+        double getTime() { return m_landingTime; }
         /** Set m_landingTime
          * \param val New value to set
          */
-        void SetlandingTime(double val) {
+        void setTime(double val) {
 
             m_landingTime = val; }
         /** Access m_callsign
          * \return The current value of m_callsign
          */
-        string Getcallsign() { return m_callsign; }
+        string getCallsign() { return m_callsign; }
         /** Set m_callsign
          * \param val New value to set
          */
-        void Setcallsign(string val) { m_callsign = val; }
+        void setCallsign(string val) { m_callsign = val; }
 
     protected:
 
