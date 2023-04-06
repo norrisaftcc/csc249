@@ -18,7 +18,7 @@ we are treating time as a double -- presumably it is in minutes.
 */
 class RunwayReserver
 {
-    static const bool DEBUG = true;
+    static const bool DEBUG = false; //true;
     public:
         /** Default constructor */
         RunwayReserver() {
@@ -56,7 +56,7 @@ class RunwayReserver
             // (but if it fails, it's not copied)
 
             // sort the vector
-            //sort(m_planes.begin(), m_planes.end());
+            sort(m_planes.begin(), m_planes.end());
 
             // in debug mode, check RI each time
             if (DEBUG) {
