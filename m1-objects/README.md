@@ -30,3 +30,7 @@ reminder: objects have state (variables) and behavior (methods)
 We will start with the existing Course.h, and below the definition, start
 implementing each of the needed functions.
 see reference from Gaddis C++ Language Companion page 99-100
+
+# topics to come back to
+* default constructor vs. parameter constructors
+* ... is one the "right" way? it depends

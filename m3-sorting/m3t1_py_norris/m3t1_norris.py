@@ -10,14 +10,17 @@ COMPARES = 0
 SWAPS = 0 
 
 def selection_sort(numbers):
-   for i in range(len(numbers)-1):
+  global COMPARES
+  global SWAPS
+  for i in range(len(numbers)-1):
    
       
       # Find index of smallest remaining element
       index_smallest = i
       for j in range(i+1, len(numbers)):
          # this if statement is a compare
-         COMPARES++
+
+         COMPARES+=1
          if numbers[j] < numbers[index_smallest]:
             index_smallest = j
             if DEBUG:
@@ -25,7 +28,7 @@ def selection_sort(numbers):
       
       # Swap numbers[i] and numbers[index_smallest]
       # obviously, this is a swap
-      SWAPS++
+      SWAPS+=1
       temp = numbers[i]
       numbers[i] = numbers[index_smallest]
       numbers[index_smallest] = temp
@@ -36,6 +39,8 @@ def selection_sort(numbers):
 
 
 def main():
+  global COMPARES
+  global SWAPS
   # Main program to test the selection sort algorithm
   numbers = [10, 2, 78, 4, 45, 32, 7, 11]
   
