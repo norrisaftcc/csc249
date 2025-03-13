@@ -1,5 +1,6 @@
 # Notes on M1
 
+
 The example contains a base main file as well as a class header (which needs getters and setters)
 
 Counterexample: (what we're not doing)
